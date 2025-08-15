@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" class="light"> <!-- or "dark" based on theme -->
+<head>
+  <!-- Head content as shown above -->
+</head>
+<body>
+  <div id="root">
+    <div class="min-h-screen bg-background text-foreground">
+      
+      <!-- Header Component (appears on all pages) -->
+      <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+        <div class="container flex h-16 max-w-screen-2xl items-center">
+          <nav class="flex items-center space-x-4 lg:space-x-6">
+            <a href="/" class="mr-6 flex items-center space-x-2">
+              <span class="text-xl font-bold">AccessibilityHub</span>
+            </a>
+            <a href="/podcast" class="transition-colors hover:text-foreground/80">Podcast</a>
+            <a href="/articles" class="transition-colors hover:text-foreground/80">Articles</a>
+            <a href="/resources" class="transition-colors hover:text-foreground/80">Resources</a>
+            <a href="/people" class="transition-colors hover:text-foreground/80">People</a>
+            <a href="/projects" class="transition-colors hover:text-foreground/80">Projects</a>
+            <a href="/contact" class="transition-colors hover:text-foreground/80">Contact</a>
+          </nav>
+          <div class="flex flex-1 items-center justify-between space-x-2 md:justify-end">
+            <!-- Theme toggle button -->
+            <button class="inline-flex items-center justify-center">
+              <!-- Theme toggle icon -->
+            </button>
+          </div>
+        </div>
+      </header>
+
+      <!-- Main Content Area (changes based on route) -->
+      <main>
+        
+        <!-- HOMEPAGE CONTENT (/) -->
+        <div class="container mx-auto px-4 py-16">
+          <!-- Hero section -->
+          <section class="text-center py-16">
+            <h1 class="text-4xl md:text-6xl font-bold mb-6">
+              Making the Web Accessible for Everyone
+            </h1>
+            <!-- Rest of homepage content -->
+          </section>
+        </div>
+
+        <!-- OR PODCAST PAGE CONTENT (/podcast) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Accessibility Podcast</h1>
+          <!-- Podcast content -->
+        </div>
+
+        <!-- OR ARTICLES PAGE CONTENT (/articles) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Articles & Blog</h1>
+          <!-- Articles content -->
+        </div>
+
+        <!-- OR RESOURCES PAGE CONTENT (/resources) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Accessibility Resources</h1>
+          <!-- Resources content -->
+        </div>
+
+        <!-- OR PEOPLE PAGE CONTENT (/people) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Accessibility People</h1>
+          <!-- People content with tabs -->
+        </div>
+
+        <!-- OR PROJECTS PAGE CONTENT (/projects) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Accessibility Projects</h1>
+          <!-- Projects content -->
+        </div>
+
+        <!-- OR CONTACT PAGE CONTENT (/contact) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Contact Us</h1>
+          <!-- Contact form -->
+        </div>
+
+        <!-- OR DESIGN SYSTEM PAGE CONTENT (/design-system) -->
+        <div class="container mx-auto px-4 py-16">
+          <h1 class="text-3xl font-bold mb-8">Design System</h1>
+          <!-- Design system documentation -->
+        </div>
+
+      </main>
+
+      <!-- Footer Component (appears on all pages) -->
+      <footer class="border-t bg-muted/50">
+        <div class="container py-8 md:py-12">
+          <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+            <!-- Footer content -->
+          </div>
+        </div>
+      </footer>
+
+    </div>
+  </div>
+</body>
+</html>

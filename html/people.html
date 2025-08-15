@@ -1,0 +1,711 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pessoas da Comunidade - Membros e profissionais que tornam a web mais acessível">
+  <meta name="keywords" content="comunidade acessibilidade, profissionais a11y, pessoas com deficiência, especialistas acessibilidade">
+  <title>Conectar & Compartilhar - AccessibilityHub</title>
+  
+  <!-- Styles from globals.css -->
+  <style>
+    @custom-variant dark (&:is(.dark *));
+
+    :root {
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.296 0.086 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.296 0.086 180.0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --radius: 0.75rem;
+    }
+
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.45 0.12 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.269 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --border: oklch(0.269 0 0);
+      --input: oklch(0.269 0 0);
+      --ring: oklch(0.45 0.12 180.0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    
+    body {
+      background-color: oklch(var(--background));
+      color: oklch(var(--foreground));
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-image: radial-gradient(circle at 25px 25px, oklch(var(--primary) / 0.02) 1px, transparent 0);
+      background-size: 50px 50px;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    
+    :focus-visible {
+      outline: 2px solid oklch(var(--ring));
+      outline-offset: 2px;
+      border-radius: calc(var(--radius) / 2);
+    }
+    
+    ::selection {
+      background-color: oklch(var(--primary) / 0.3);
+      color: oklch(var(--primary-foreground));
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      background-color: oklch(var(--primary));
+      color: oklch(var(--primary-foreground));
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background-color: oklch(var(--primary) / 0.9);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: oklch(var(--foreground));
+      border: 2px solid oklch(var(--border));
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background-color: oklch(var(--accent));
+      border-color: oklch(var(--primary));
+    }
+
+    .card {
+      background-color: oklch(var(--card));
+      border: 1px solid oklch(var(--border));
+      border-radius: calc(var(--radius) + 0.25rem);
+      padding: 2rem;
+      box-shadow: 0 10px 15px -3px oklch(var(--primary) / 0.1), 0 4px 6px -2px oklch(var(--primary) / 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 25px -5px oklch(var(--primary) / 0.15), 0 10px 10px -5px oklch(var(--primary) / 0.1);
+      transform: translateY(-2px);
+    }
+
+    .person-card {
+      background-color: oklch(var(--card));
+      border: 1px solid oklch(var(--border));
+      border-radius: calc(var(--radius) + 0.25rem);
+      padding: 1.5rem;
+      box-shadow: 0 10px 15px -3px oklch(var(--primary) / 0.1), 0 4px 6px -2px oklch(var(--primary) / 0.05);
+      transition: all 0.3s ease;
+      text-align: center;
+    }
+
+    .person-card:hover {
+      box-shadow: 0 20px 25px -5px oklch(var(--primary) / 0.15), 0 10px 10px -5px oklch(var(--primary) / 0.1);
+      transform: translateY(-2px);
+    }
+
+    .nav-link {
+      color: oklch(var(--muted-foreground));
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--radius));
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: oklch(var(--accent));
+      color: oklch(var(--accent-foreground));
+    }
+
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .space-x-4 > * + * { margin-left: 1rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-8 { gap: 2rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mt-8 { margin-top: 2rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .pt-8 { padding-top: 2rem; }
+    .border-t { border-top: 1px solid oklch(var(--border)); }
+
+    .muted {
+      color: oklch(var(--muted-foreground));
+    }
+
+    .badge {
+      padding: 0.25rem 0.5rem;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .badge-advocacy {
+      background-color: oklch(var(--chart-1) / 0.1);
+      color: oklch(var(--chart-1));
+    }
+
+    .badge-engineering {
+      background-color: oklch(var(--chart-2) / 0.1);
+      color: oklch(var(--chart-2));
+    }
+
+    .badge-design {
+      background-color: oklch(var(--chart-3) / 0.1);
+      color: oklch(var(--chart-3));
+    }
+
+    .badge-research {
+      background-color: oklch(var(--chart-4) / 0.1);
+      color: oklch(var(--chart-4));
+    }
+
+    .badge-community {
+      background-color: oklch(var(--chart-5) / 0.1);
+      color: oklch(var(--chart-5));
+    }
+
+    .tabs {
+      display: flex;
+      border-bottom: 1px solid oklch(var(--border));
+      margin-bottom: 2rem;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .tab {
+      padding: 0.75rem 1.5rem;
+      border: none;
+      background: none;
+      color: oklch(var(--muted-foreground));
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+      font-weight: 500;
+    }
+
+    .tab:hover {
+      color: oklch(var(--foreground));
+    }
+
+    .tab.active {
+      color: oklch(var(--primary));
+      border-bottom-color: oklch(var(--primary));
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <div class="container">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Logo -->
+        <a href="/index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: bold; font-size: 1.125rem; letter-spacing: -0.025em;">AccessibilityHub</div>
+            <div style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-top: -0.25rem;">Comunidade de Acessibilidade</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-1" role="navigation" aria-label="Navegação principal">
+          <a href="/articles.html" class="nav-link">Aprender</a>
+          <a href="/people.html" class="nav-link active">Pessoas</a>
+          <a href="/projects.html" class="nav-link">Projetos</a>
+          <a href="/resources.html" class="nav-link">Recursos</a>
+        </nav>
+
+        <!-- Right side actions -->
+        <div class="flex items-center space-x-3">
+          <button class="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100" 
+                  onclick="toggleTheme()" 
+                  aria-label="Alternar tema">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="py-16" style="background: linear-gradient(to bottom, oklch(var(--muted) / 0.3), oklch(var(--background)));">
+      <div class="container">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 style="font-size: clamp(2.5rem, 5vw, 3rem); font-weight: bold; margin-bottom: 1.5rem;">
+            Conectar & Compartilhar
+          </h1>
+          <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); margin-bottom: 2rem; line-height: 1.6;">
+            Conheça pessoas incríveis que estão fazendo a diferença na acessibilidade. 
+            Uma comunidade vibrante de profissionais, defensores e pessoas que acreditam num mundo digital mais inclusivo.
+          </p>
+          
+          <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; margin-bottom: 2rem;">
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: bold; color: oklch(var(--primary)); margin-bottom: 0.5rem;">5.2K+</div>
+              <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Membros da Comunidade</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: bold; color: oklch(var(--primary)); margin-bottom: 0.5rem;">47</div>
+              <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Países Representados</div>
+            </div>
+            <div style="text-align: center;">
+              <div style="font-size: 2rem; font-weight: bold; color: oklch(var(--primary)); margin-bottom: 0.5rem;">320+</div>
+              <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Profissionais Ativos</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Tabs Section -->
+    <section class="py-16">
+      <div class="container">
+        <div class="max-w-6xl mx-auto">
+          <!-- Tabs -->
+          <div class="tabs">
+            <button class="tab active" data-tab="featured">Em Destaque</button>
+            <button class="tab" data-tab="community">Comunidade</button>
+            <button class="tab" data-tab="professionals">Profissionais</button>
+          </div>
+
+          <!-- Featured People -->
+          <div id="featured" class="tab-content">
+            <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">
+              Pessoas que Inspiram Nossa Comunidade
+            </h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+              <!-- Person 1 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--chart-1) / 0.2), oklch(var(--chart-1) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--chart-1));">HG</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Haben Girma</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">Advogada de Direitos da Pessoa com Deficiência</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Primeira graduada surdocega da Harvard Law School e defensora internacional dos direitos das pessoas com deficiência
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-advocacy">Advocacy</span>
+                  <span class="badge badge-research">Direitos</span>
+                </div>
+              </div>
+
+              <!-- Person 2 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--chart-2) / 0.2), oklch(var(--chart-2) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--chart-2));">LW</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Léonie Watson</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">Engenheira de Acessibilidade & Cofundadora</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Cofundadora da TetraLogical e membro do W3C Advisory Board, especialista em tecnologias assistivas
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-engineering">Engenharia</span>
+                  <span class="badge badge-advocacy">Padrões</span>
+                </div>
+              </div>
+
+              <!-- Person 3 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--chart-3) / 0.2), oklch(var(--chart-3) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--chart-3));">SC</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Sarah Chen</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">UX Designer Sênior</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Liderando iniciativas de design inclusivo na Microsoft, especialista em pesquisa com usuários
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-design">Design</span>
+                  <span class="badge badge-research">UX Research</span>
+                </div>
+              </div>
+
+              <!-- Person 4 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--chart-4) / 0.2), oklch(var(--chart-4) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--chart-4));">MR</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Maria Rodriguez</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">Desenvolvedora Frontend</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Especialista em implementação de componentes acessíveis, mentora ativa da comunidade
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-engineering">Desenvolvimento</span>
+                  <span class="badge badge-community">Mentoria</span>
+                </div>
+              </div>
+
+              <!-- Person 5 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--chart-5) / 0.2), oklch(var(--chart-5) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--chart-5));">AK</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Alex Kim</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">Especialista em Acessibilidade</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Consultor independente focado em testes de acessibilidade e treinamento de equipes
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-research">Consultoria</span>
+                  <span class="badge badge-community">Educação</span>
+                </div>
+              </div>
+
+              <!-- Person 6 -->
+              <div class="person-card">
+                <div style="width: 5rem; height: 5rem; background: linear-gradient(135deg, oklch(var(--primary) / 0.2), oklch(var(--primary) / 0.1)); border-radius: 50%; margin: 0 auto 1rem; display: flex; align-items: center; justify-content: center;">
+                  <span style="font-size: 1.125rem; font-weight: 600; color: oklch(var(--primary));">JW</span>
+                </div>
+                <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">Jennifer Wu</h3>
+                <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground)); margin-bottom: 0.75rem;">Product Manager</p>
+                <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-bottom: 1rem; line-height: 1.4;">
+                  Liderando produtos acessíveis em startups, defensora de processos inclusivos desde o início
+                </p>
+                <div style="display: flex; justify-content: center; gap: 0.5rem; flex-wrap: wrap;">
+                  <span class="badge badge-design">Product</span>
+                  <span class="badge badge-advocacy">Estratégia</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Community Tab (Hidden by default) -->
+          <div id="community" class="tab-content" style="display: none;">
+            <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">
+              Nossa Comunidade Vibrante
+            </h2>
+            <div class="text-center">
+              <p style="color: oklch(var(--muted-foreground)); margin-bottom: 2rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
+                Membros ativos da nossa comunidade que contribuem diariamente com conhecimento, 
+                experiências e apoio mútuo. Juntos, estamos construindo um futuro mais acessível.
+              </p>
+              <div class="card" style="max-width: 32rem; margin: 0 auto;">
+                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Faça Parte da Nossa Comunidade</h3>
+                <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem;">
+                  Conecte-se com pessoas que compartilham sua paixão por acessibilidade. 
+                  Aprenda, ensine e cresça junto conosco.
+                </p>
+                <a href="/contact.html" class="btn-primary">
+                  <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                  </svg>
+                  Participar da Comunidade
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- Professionals Tab (Hidden by default) -->
+          <div id="professionals" class="tab-content" style="display: none;">
+            <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">
+              Profissionais de Acessibilidade
+            </h2>
+            <div class="text-center">
+              <p style="color: oklch(var(--muted-foreground)); margin-bottom: 2rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
+                Profissionais experientes que oferecem consultoria, treinamento e serviços especializados 
+                em acessibilidade digital. Entre em contato para colaborações e oportunidades.
+              </p>
+              <div class="card" style="max-width: 32rem; margin: 0 auto;">
+                <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Conecte-se com Especialistas</h3>
+                <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem;">
+                  Encontre profissionais qualificados para seus projetos de acessibilidade 
+                  ou ofereça seus serviços para a comunidade.
+                </p>
+                <a href="/contact.html" class="btn-primary">
+                  <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2-2v2m8 0V6a2 2 0 012 2v6a2 2 0 01-2 2H6a2 2 0 01-2-2V8a2 2 0 012-2V6"></path>
+                  </svg>
+                  Encontrar Profissionais
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="py-16" style="background: linear-gradient(to right, oklch(var(--primary) / 0.05), oklch(var(--background)), oklch(var(--chart-2) / 0.05));">
+      <div class="container">
+        <div class="text-center">
+          <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem;">
+            Junte-se à Nossa Missão
+          </h2>
+          <p style="color: oklch(var(--muted-foreground)); margin-bottom: 2rem; max-width: 48rem; margin-left: auto; margin-right: auto;">
+            Seja você um profissional experiente, estudante ou pessoa interessada em acessibilidade, 
+            há um lugar para você na nossa comunidade. Vamos construir juntos um mundo digital mais inclusivo.
+          </p>
+          <div style="display: flex; flex-col; sm:flex-direction: row; gap: 1rem; justify-content: center; align-items: center;">
+            <a href="/contact.html" class="btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">
+              <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+              Participar da Comunidade
+            </a>
+            <a href="#" class="btn-outline" style="font-size: 1.125rem; padding: 1rem 2rem;">
+              <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+              </svg>
+              Saiba Mais
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t" style="background-color: oklch(var(--card));">
+    <div class="container py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 style="font-weight: bold; font-size: 1.125rem;">AccessibilityHub</h3>
+          </div>
+          <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+            Criando um mundo digital mais inclusivo através de educação, ferramentas e comunidade.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Conteúdo</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/articles.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Artigos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/resources.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Recursos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/projects.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Projetos</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Comunidade</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/people.html" style="color: oklch(var(--primary)); text-decoration: none; font-size: 0.875rem;">Pessoas</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/contact.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Contato</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#newsletter" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Newsletter</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Recursos</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/design-system.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Design System</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Diretrizes</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Ferramentas</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t mt-8 pt-8 text-center">
+        <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">
+          &copy; 2024 AccessibilityHub. Todos os direitos reservados. Criando um mundo digital mais acessível para todos.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(savedTheme);
+
+    // Tab functionality
+    document.addEventListener('DOMContentLoaded', function() {
+      const tabs = document.querySelectorAll('.tab');
+      const contents = document.querySelectorAll('.tab-content');
+
+      tabs.forEach(tab => {
+        tab.addEventListener('click', function() {
+          // Remove active class from all tabs
+          tabs.forEach(t => t.classList.remove('active'));
+          // Add active class to clicked tab
+          this.classList.add('active');
+          
+          // Hide all content
+          contents.forEach(content => content.style.display = 'none');
+          // Show selected content
+          const targetId = this.getAttribute('data-tab');
+          document.getElementById(targetId).style.display = 'block';
+        });
+      });
+    });
+  </script>
+</body>
+</html>

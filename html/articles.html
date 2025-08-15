@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Artigos sobre acessibilidade - Insights especializados sobre acessibilidade web, design inclusivo e diretrizes WCAG">
+  <meta name="keywords" content="artigos sobre acessibilidade, blog de acessibilidade web, diretrizes WCAG, design inclusivo, a11y">
+  <title>Aprender & Descobrir - AccessibilityHub</title>
+  
+  <!-- Styles from globals.css -->
+  <style>
+    @custom-variant dark (&:is(.dark *));
+
+    :root {
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.296 0.086 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.296 0.086 180.0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --radius: 0.75rem;
+    }
+
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.45 0.12 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.269 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --border: oklch(0.269 0 0);
+      --input: oklch(0.269 0 0);
+      --ring: oklch(0.45 0.12 180.0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    
+    body {
+      background-color: oklch(var(--background));
+      color: oklch(var(--foreground));
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-image: radial-gradient(circle at 25px 25px, oklch(var(--primary) / 0.02) 1px, transparent 0);
+      background-size: 50px 50px;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    
+    :focus-visible {
+      outline: 2px solid oklch(var(--ring));
+      outline-offset: 2px;
+      border-radius: calc(var(--radius) / 2);
+    }
+    
+    ::selection {
+      background-color: oklch(var(--primary) / 0.3);
+      color: oklch(var(--primary-foreground));
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      background-color: oklch(var(--primary));
+      color: oklch(var(--primary-foreground));
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background-color: oklch(var(--primary) / 0.9);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: oklch(var(--foreground));
+      border: 2px solid oklch(var(--border));
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background-color: oklch(var(--accent));
+      border-color: oklch(var(--primary));
+    }
+
+    .card {
+      background-color: oklch(var(--card));
+      border: 1px solid oklch(var(--border));
+      border-radius: calc(var(--radius) + 0.25rem);
+      padding: 2rem;
+      box-shadow: 0 10px 15px -3px oklch(var(--primary) / 0.1), 0 4px 6px -2px oklch(var(--primary) / 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 25px -5px oklch(var(--primary) / 0.15), 0 10px 10px -5px oklch(var(--primary) / 0.1);
+      transform: translateY(-2px);
+    }
+
+    .badge {
+      background-color: oklch(var(--primary) / 0.1);
+      color: oklch(var(--primary));
+      border: 1px solid oklch(var(--primary) / 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .nav-link {
+      color: oklch(var(--muted-foreground));
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--radius));
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover, .nav-link.active {
+      background-color: oklch(var(--accent));
+      color: oklch(var(--accent-foreground));
+    }
+
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .space-x-4 > * + * { margin-left: 1rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-8 { gap: 2rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mt-8 { margin-top: 2rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .pt-8 { padding-top: 2rem; }
+    .border-t { border-top: 1px solid oklch(var(--border)); }
+
+    .muted {
+      color: oklch(var(--muted-foreground));
+    }
+
+    .article-badge-tutorial {
+      background-color: oklch(var(--chart-1) / 0.1);
+      color: oklch(var(--chart-1));
+    }
+
+    .article-badge-case-study {
+      background-color: oklch(var(--chart-2) / 0.1);
+      color: oklch(var(--chart-2));
+    }
+
+    .article-badge-research {
+      background-color: oklch(var(--chart-3) / 0.1);
+      color: oklch(var(--chart-3));
+    }
+
+    .article-badge-best-practices {
+      background-color: oklch(var(--chart-4) / 0.1);
+      color: oklch(var(--chart-4));
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <div class="container">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Logo -->
+        <a href="/index.html" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: bold; font-size: 1.125rem; letter-spacing: -0.025em;">AccessibilityHub</div>
+            <div style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-top: -0.25rem;">Comunidade de Acessibilidade</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-1" role="navigation" aria-label="Navegação principal">
+          <a href="/articles.html" class="nav-link active">Aprender</a>
+          <a href="/people.html" class="nav-link">Pessoas</a>
+          <a href="/projects.html" class="nav-link">Projetos</a>
+          <a href="/resources.html" class="nav-link">Recursos</a>
+        </nav>
+
+        <!-- Right side actions -->
+        <div class="flex items-center space-x-3">
+          <button class="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100" 
+                  onclick="toggleTheme()" 
+                  aria-label="Alternar tema">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="py-16" style="background: linear-gradient(to bottom, oklch(var(--muted) / 0.3), oklch(var(--background)));">
+      <div class="container">
+        <div class="max-w-4xl mx-auto text-center">
+          <h1 style="font-size: clamp(2.5rem, 5vw, 3rem); font-weight: bold; margin-bottom: 1.5rem;">
+            Aprender & Descobrir
+          </h1>
+          <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); margin-bottom: 2rem; line-height: 1.6;">
+            Artigos detalhados, tutoriais e insights sobre acessibilidade digital, design inclusivo 
+            e melhores práticas para criar experiências acessíveis na web.
+          </p>
+          
+          <!-- Category filters -->
+          <div class="flex flex-wrap justify-center gap-2 text-sm mb-8">
+            <button class="btn-primary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Todos os Artigos</button>
+            <button class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Tutoriais</button>
+            <button class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Melhores Práticas</button>
+            <button class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Estudos de Caso</button>
+            <button class="btn-outline" style="padding: 0.5rem 1rem; font-size: 0.875rem;">Pesquisa</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured Article -->
+    <section class="py-16">
+      <div class="container">
+        <div class="max-w-6xl mx-auto">
+          <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">
+            Artigo em Destaque
+          </h2>
+          
+          <div class="card" style="padding: 0; overflow: hidden;">
+            <div style="display: flex; flex-direction: column;">
+              <div style="display: flex; flex-direction: column; lg:flex-direction: row;">
+                <div style="flex: 1; padding: 2rem;">
+                  <div class="flex items-center space-x-2 mb-4">
+                    <span class="article-badge-tutorial" style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem;">Destaque</span>
+                    <span class="article-badge-case-study" style="padding: 0.25rem 0.75rem; border-radius: 9999px; font-size: 0.875rem;">Tutorial</span>
+                    <span style="color: oklch(var(--muted-foreground)); font-size: 0.875rem;">8 min de leitura</span>
+                  </div>
+                  
+                  <h3 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 1rem;">
+                    <a href="/article-example.html" style="color: inherit; text-decoration: none;">
+                      Guia Completo de ARIA Labels e Descrições
+                    </a>
+                  </h3>
+                  
+                  <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+                    Domine a arte dos ARIA labels e descrições para criar experiências web mais acessíveis. 
+                    Este guia abrangente cobre exemplos práticos, erros comuns e melhores práticas 
+                    para implementar atributos ARIA de forma eficaz.
+                  </p>
+                  
+                  <div class="flex items-center justify-between">
+                    <div class="flex items-center space-x-3">
+                      <div style="width: 2.5rem; height: 2.5rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                        <span style="font-size: 0.875rem; font-weight: 500;">SC</span>
+                      </div>
+                      <div>
+                        <div style="font-weight: 500;">Sarah Chen</div>
+                        <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">8 de Dez, 2024</div>
+                      </div>
+                    </div>
+                    <a href="/article-example.html" class="btn-primary">
+                      Ler Artigo
+                    </a>
+                  </div>
+                </div>
+                <div style="flex: 1; min-height: 16rem; background: linear-gradient(135deg, oklch(var(--chart-1) / 0.1), oklch(var(--chart-2) / 0.1)); display: flex; align-items: center; justify-content: center;">
+                  <svg style="width: 4rem; height: 4rem; color: oklch(var(--primary));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path>
+                  </svg>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Articles Grid -->
+    <section class="py-16" style="background-color: oklch(var(--muted) / 0.3);">
+      <div class="container">
+        <div class="max-w-6xl mx-auto">
+          <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 2rem; text-align: center;">
+            Artigos Recentes
+          </h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <!-- Article 1 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="article-badge-best-practices" style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Melhores Práticas</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">6 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Padrões de Navegação por Teclado para Componentes Complexos</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Aprenda como implementar navegação por teclado adequada para componentes complexos como modais, dropdowns e tabelas de dados.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">AK</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Alex Kim • 5 de Dez, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+
+            <!-- Article 2 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="article-badge-case-study" style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Estudo de Caso</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">10 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Como a Netflix Melhorou a Acessibilidade do Player de Vídeo</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Um mergulho profundo na jornada da Netflix para tornar seu player de vídeo acessível a usuários com deficiências, incluindo desafios técnicos e soluções.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">MR</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Maria Rodriguez • 3 de Dez, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+
+            <!-- Article 3 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="article-badge-tutorial" style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Tutorial</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">12 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Construindo Componentes React Acessíveis</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Guia passo a passo para criar componentes React acessíveis com atributos ARIA adequados, suporte a teclado e compatibilidade com leitores de tela.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">JW</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Jennifer Wu • 28 de Nov, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+
+            <!-- Article 4 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="article-badge-research" style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Pesquisa</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">15 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Impacto das Interfaces de Voz na Acessibilidade</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Resultados de pesquisa sobre como as interfaces de voz estão mudando o cenário da acessibilidade e seus benefícios para usuários com deficiências motoras.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">DL</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Dra. Lisa Park • 25 de Nov, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+
+            <!-- Article 5 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="article-badge-best-practices" style="padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Melhores Práticas</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">7 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Acessibilidade de Cores Além dos Contrastes</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Explore considerações de acessibilidade de cores além dos requisitos de contraste WCAG, incluindo daltonismo e fatores culturais.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">MS</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Mike Santos • 22 de Nov, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+
+            <!-- Article 6 -->
+            <article class="card" style="padding: 1.5rem;">
+              <div class="flex items-center space-x-2 mb-3">
+                <span style="background-color: oklch(var(--destructive) / 0.1); color: oklch(var(--destructive)); padding: 0.25rem 0.5rem; border-radius: 9999px; font-size: 0.75rem;">Legal</span>
+                <span style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">9 min de leitura</span>
+              </div>
+              <h3 style="font-size: 1.125rem; font-weight: 600; margin-bottom: 0.5rem;">
+                <a href="#" style="color: inherit; text-decoration: none;">Entendendo a Conformidade ADA para Websites</a>
+              </h3>
+              <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+                Navegue pelo cenário legal da acessibilidade de websites, incluindo requisitos ADA, casos judiciais recentes e estratégias de conformidade.
+              </p>
+              <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2">
+                  <div style="width: 2rem; height: 2rem; background: oklch(var(--muted)); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+                    <span style="font-size: 0.75rem;">LT</span>
+                  </div>
+                  <span style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">Equipe Legal • 20 de Nov, 2024</span>
+                </div>
+                <a href="#" style="color: oklch(var(--primary)); font-size: 0.875rem; font-weight: 500; text-decoration: none;">Ler →</a>
+              </div>
+            </article>
+          </div>
+          
+          <div class="text-center mt-12">
+            <button class="btn-outline" style="padding: 0.75rem 2rem;">
+              Carregar Mais Artigos
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section class="py-16">
+      <div class="container">
+        <div class="max-w-2xl mx-auto text-center">
+          <div class="card">
+            <h2 style="font-size: 1.875rem; font-weight: bold; margin-bottom: 1rem;">
+              Fique Atualizado
+            </h2>
+            <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem;">
+              Receba nossos artigos mais recentes e insights sobre acessibilidade diretamente no seu email semanalmente.
+            </p>
+            <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto">
+              <input type="email" 
+                     placeholder="Seu melhor email" 
+                     style="flex: 1; padding: 0.75rem 1rem; border-radius: calc(var(--radius)); border: 1px solid oklch(var(--border)); background-color: oklch(var(--background)); color: oklch(var(--foreground));"
+                     required
+                     aria-label="Endereço de email">
+              <button type="submit" class="btn-primary">
+                Inscrever-se
+              </button>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t" style="background-color: oklch(var(--card));">
+    <div class="container py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 style="font-weight: bold; font-size: 1.125rem;">AccessibilityHub</h3>
+          </div>
+          <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+            Criando um mundo digital mais inclusivo através de educação, ferramentas e comunidade.
+          </p>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Conteúdo</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/articles.html" style="color: oklch(var(--primary)); text-decoration: none; font-size: 0.875rem;">Artigos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/resources.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Recursos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/projects.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Projetos</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Comunidade</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/people.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Pessoas</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/contact.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Contato</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#newsletter" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Newsletter</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Recursos</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/design-system.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Design System</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Diretrizes</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem;">Ferramentas</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t mt-8 pt-8 text-center">
+        <p style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">
+          &copy; 2024 AccessibilityHub. Todos os direitos reservados. Criando um mundo digital mais acessível para todos.
+        </p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(savedTheme);
+
+    // Newsletter form submission
+    document.querySelector('form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const email = this.querySelector('input[type="email"]').value;
+      alert('Obrigado! Você será redirecionado para a página de confirmação em breve.');
+    });
+  </script>
+</body>
+</html>

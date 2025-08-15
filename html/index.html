@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="pt-BR" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Construindo uma web mais acessível juntos - Hub de acessibilidade e comunidade focado em inclusão digital">
+  <meta name="keywords" content="acessibilidade, WCAG, design inclusivo, a11y, acessibilidade web, direitos das pessoas com deficiência, comunidade">
+  <title>AccessibilityHub - Construindo uma web mais acessível juntos</title>
+  
+  <!-- SEO and Social Meta -->
+  <meta property="og:title" content="AccessibilityHub - Construindo uma web mais acessível juntos">
+  <meta property="og:description" content="Uma comunidade vibrante de pessoas que acreditam que a web deve ser acessível para todos">
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://accessibility-hub.com">
+  
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="AccessibilityHub">
+  <meta name="twitter:description" content="Construindo uma web mais acessível juntos">
+  
+  <!-- Accessibility -->
+  <meta name="theme-color" content="#005151">
+  <meta name="color-scheme" content="light dark">
+  
+  <!-- Styles from globals.css -->
+  <style>
+    @custom-variant dark (&:is(.dark *));
+
+    :root {
+      --background: oklch(1 0 0);
+      --foreground: oklch(0.145 0 0);
+      --card: oklch(1 0 0);
+      --card-foreground: oklch(0.145 0 0);
+      --popover: oklch(1 0 0);
+      --popover-foreground: oklch(0.145 0 0);
+      --primary: oklch(0.296 0.086 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.97 0 0);
+      --secondary-foreground: oklch(0.205 0 0);
+      --muted: oklch(0.97 0 0);
+      --muted-foreground: oklch(0.556 0 0);
+      --accent: oklch(0.97 0 0);
+      --accent-foreground: oklch(0.205 0 0);
+      --destructive: oklch(0.577 0.245 27.325);
+      --destructive-foreground: oklch(0.985 0 0);
+      --border: oklch(0.922 0 0);
+      --input: oklch(0.922 0 0);
+      --ring: oklch(0.296 0.086 180.0);
+      --chart-1: oklch(0.646 0.222 41.116);
+      --chart-2: oklch(0.6 0.118 184.704);
+      --chart-3: oklch(0.398 0.07 227.392);
+      --chart-4: oklch(0.828 0.189 84.429);
+      --chart-5: oklch(0.769 0.188 70.08);
+      --radius: 0.75rem;
+    }
+
+    .dark {
+      --background: oklch(0.145 0 0);
+      --foreground: oklch(0.985 0 0);
+      --card: oklch(0.205 0 0);
+      --card-foreground: oklch(0.985 0 0);
+      --popover: oklch(0.205 0 0);
+      --popover-foreground: oklch(0.985 0 0);
+      --primary: oklch(0.45 0.12 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+      --secondary: oklch(0.269 0 0);
+      --secondary-foreground: oklch(0.985 0 0);
+      --muted: oklch(0.269 0 0);
+      --muted-foreground: oklch(0.708 0 0);
+      --accent: oklch(0.269 0 0);
+      --accent-foreground: oklch(0.985 0 0);
+      --destructive: oklch(0.477 0.201 25.331);
+      --destructive-foreground: oklch(0.985 0 0);
+      --border: oklch(0.269 0 0);
+      --input: oklch(0.269 0 0);
+      --ring: oklch(0.45 0.12 180.0);
+      --chart-1: oklch(0.488 0.243 264.376);
+      --chart-2: oklch(0.696 0.17 162.48);
+      --chart-3: oklch(0.769 0.188 70.08);
+      --chart-4: oklch(0.627 0.265 303.9);
+      --chart-5: oklch(0.645 0.246 16.439);
+    }
+
+    * {
+      box-sizing: border-box;
+      outline: 2px solid transparent;
+      outline-offset: 2px;
+    }
+    
+    body {
+      background-color: oklch(var(--background));
+      color: oklch(var(--foreground));
+      transition: background-color 0.3s ease, color 0.3s ease;
+      background-image: radial-gradient(circle at 25px 25px, oklch(var(--primary) / 0.02) 1px, transparent 0);
+      background-size: 50px 50px;
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.6;
+    }
+    
+    *,
+    *::before,
+    *::after {
+      transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    
+    :focus-visible {
+      outline: 2px solid oklch(var(--ring));
+      outline-offset: 2px;
+      border-radius: calc(var(--radius) / 2);
+    }
+    
+    ::selection {
+      background-color: oklch(var(--primary) / 0.3);
+      color: oklch(var(--primary-foreground));
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      letter-spacing: -0.02em;
+      line-height: 1.2;
+      margin: 0;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1rem;
+    }
+
+    .btn-primary {
+      background-color: oklch(var(--primary));
+      color: oklch(var(--primary-foreground));
+      border: none;
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-primary:hover {
+      background-color: oklch(var(--primary) / 0.9);
+      transform: translateY(-1px);
+    }
+
+    .btn-outline {
+      background-color: transparent;
+      color: oklch(var(--foreground));
+      border: 2px solid oklch(var(--border));
+      padding: 0.75rem 2rem;
+      border-radius: calc(var(--radius));
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-decoration: none;
+    }
+
+    .btn-outline:hover {
+      background-color: oklch(var(--accent));
+      border-color: oklch(var(--primary));
+    }
+
+    .card {
+      background-color: oklch(var(--card));
+      border: 1px solid oklch(var(--border));
+      border-radius: calc(var(--radius) + 0.25rem);
+      padding: 2rem;
+      box-shadow: 0 10px 15px -3px oklch(var(--primary) / 0.1), 0 4px 6px -2px oklch(var(--primary) / 0.05);
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      box-shadow: 0 20px 25px -5px oklch(var(--primary) / 0.15), 0 10px 10px -5px oklch(var(--primary) / 0.1);
+      transform: translateY(-2px);
+    }
+
+    .badge {
+      background-color: oklch(var(--primary) / 0.1);
+      color: oklch(var(--primary));
+      border: 1px solid oklch(var(--primary) / 0.2);
+      padding: 0.25rem 0.75rem;
+      border-radius: 9999px;
+      font-size: 0.875rem;
+      font-weight: 500;
+      display: inline-block;
+    }
+
+    .nav-link {
+      color: oklch(var(--muted-foreground));
+      text-decoration: none;
+      padding: 0.5rem 1rem;
+      border-radius: calc(var(--radius));
+      transition: all 0.2s ease;
+    }
+
+    .nav-link:hover {
+      background-color: oklch(var(--accent));
+      color: oklch(var(--accent-foreground));
+    }
+
+    .grid {
+      display: grid;
+      gap: 2rem;
+    }
+
+    .grid-cols-1 {
+      grid-template-columns: repeat(1, 1fr);
+    }
+
+    .grid-cols-2 {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .grid-cols-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    @media (min-width: 640px) {
+      .sm\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+
+    @media (min-width: 768px) {
+      .md\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .md\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    @media (min-width: 1024px) {
+      .lg\:grid-cols-2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .lg\:grid-cols-3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+
+    .text-center { text-align: center; }
+    .text-left { text-align: left; }
+    .flex { display: flex; }
+    .flex-col { flex-direction: column; }
+    .items-center { align-items: center; }
+    .justify-center { justify-content: center; }
+    .justify-between { justify-content: space-between; }
+    .space-x-4 > * + * { margin-left: 1rem; }
+    .space-y-4 > * + * { margin-top: 1rem; }
+    .space-y-8 > * + * { margin-top: 2rem; }
+    .gap-4 { gap: 1rem; }
+    .gap-8 { gap: 2rem; }
+    .mb-4 { margin-bottom: 1rem; }
+    .mb-6 { margin-bottom: 1.5rem; }
+    .mb-8 { margin-bottom: 2rem; }
+    .mb-12 { margin-bottom: 3rem; }
+    .mb-16 { margin-bottom: 4rem; }
+    .mt-8 { margin-top: 2rem; }
+    .py-8 { padding-top: 2rem; padding-bottom: 2rem; }
+    .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+    .py-16 { padding-top: 4rem; padding-bottom: 4rem; }
+    .py-20 { padding-top: 5rem; padding-bottom: 5rem; }
+    .px-4 { padding-left: 1rem; padding-right: 1rem; }
+    .pt-8 { padding-top: 2rem; }
+    .border-t { border-top: 1px solid oklch(var(--border)); }
+
+    .muted {
+      color: oklch(var(--muted-foreground));
+    }
+
+    @keyframes gentle-pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.9; }
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0px); }
+      50% { transform: translateY(-10px); }
+    }
+
+    .illustration {
+      animation: gentle-pulse 4s ease-in-out infinite;
+    }
+
+    .illustration-float {
+      animation: float 6s ease-in-out infinite;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .illustration,
+      .illustration-float {
+        animation: none;
+      }
+      
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+
+    /* Mobile responsive */
+    @media (max-width: 767px) {
+      .container {
+        padding: 0 1rem;
+      }
+      
+      .flex-col-mobile {
+        flex-direction: column;
+      }
+      
+      .gap-4-mobile {
+        gap: 1rem;
+      }
+    }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur">
+    <div class="container">
+      <div class="flex h-16 items-center justify-between">
+        <!-- Logo -->
+        <a href="/" class="flex items-center space-x-3 hover:opacity-80 transition-opacity">
+          <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+            <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+          </div>
+          <div>
+            <div style="font-weight: bold; font-size: 1.125rem; letter-spacing: -0.025em;">AccessibilityHub</div>
+            <div style="font-size: 0.75rem; color: oklch(var(--muted-foreground)); margin-top: -0.25rem;">Comunidade de Acessibilidade</div>
+          </div>
+        </a>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex items-center space-x-1" role="navigation" aria-label="Navegação principal">
+          <a href="/articles.html" class="nav-link">Aprender</a>
+          <a href="/people.html" class="nav-link">Pessoas</a>
+          <a href="/projects.html" class="nav-link">Projetos</a>
+          <a href="/resources.html" class="nav-link">Recursos</a>
+        </nav>
+
+        <!-- Right side actions -->
+        <div class="flex items-center space-x-3">
+          <button class="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100" 
+                  onclick="toggleTheme()" 
+                  aria-label="Alternar tema">
+            <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+            </svg>
+          </button>
+          <a href="#newsletter" class="btn-primary hidden sm:inline-flex">
+            <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+            </svg>
+            Newsletter
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Hero Section -->
+    <section class="py-20 lg:py-32">
+      <div class="container">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+          <div class="space-y-8">
+            <div class="space-y-4">
+              <span class="badge">
+                🌟 Uma comunidade para todos
+              </span>
+              <h1 style="font-size: clamp(2rem, 5vw, 3.75rem); font-weight: bold; letter-spacing: -0.02em;">
+                Construindo uma web
+                <span style="color: oklch(var(--primary)); display: block;">mais acessível juntos</span>
+              </h1>
+              <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); line-height: 1.6; max-width: 40rem;">
+                Somos uma comunidade vibrante de pessoas que acreditam que a web deve ser 
+                acessível para todos. Aqui você encontra apoio, aprende e cresce junto com outros 
+                apaixonados por inclusão digital.
+              </p>
+            </div>
+            
+            <div class="flex flex-col sm:flex-row gap-4">
+              <a href="/people.html" class="btn-primary" style="font-size: 1.125rem; padding: 1rem 2rem;">
+                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+                </svg>
+                Conhecer a Comunidade
+              </a>
+              <a href="/articles.html" class="btn-outline" style="font-size: 1.125rem; padding: 1rem 2rem;">
+                <svg style="width: 1.25rem; height: 1.25rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+                Começar a Aprender
+              </a>
+            </div>
+
+            <!-- Community stats -->
+            <div class="flex flex-wrap gap-8 pt-8 border-t">
+              <div class="text-center">
+                <div style="font-size: 1.5rem; font-weight: bold; color: oklch(var(--primary));">5.2K+</div>
+                <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Membros ativos</div>
+              </div>
+              <div class="text-center">
+                <div style="font-size: 1.5rem; font-weight: bold; color: oklch(var(--primary));">150+</div>
+                <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Artigos compartilhados</div>
+              </div>
+              <div class="text-center">
+                <div style="font-size: 1.5rem; font-weight: bold; color: oklch(var(--primary));">40+</div>
+                <div style="font-size: 0.875rem; color: oklch(var(--muted-foreground));">Eventos realizados</div>
+              </div>
+            </div>
+          </div>
+          
+          <div class="flex justify-center lg:justify-end">
+            <div class="illustration" style="max-width: 32rem;">
+              <!-- Placeholder for community illustration -->
+              <div style="width: 100%; height: 24rem; background: linear-gradient(135deg, oklch(var(--primary) / 0.1), oklch(var(--chart-2) / 0.1)); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: oklch(var(--primary));">
+                <svg style="width: 8rem; height: 8rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Values Section -->
+    <section class="py-20" style="background-color: oklch(var(--muted) / 0.3);">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 style="font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: bold; margin-bottom: 1.5rem;">
+            O que nos move como comunidade
+          </h2>
+          <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); max-width: 48rem; margin: 0 auto;">
+            Nossos valores guiam cada interação, cada projeto e cada iniciativa que desenvolvemos juntos.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <!-- Value 1 -->
+          <div class="card text-center">
+            <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+              <div class="illustration-float" style="width: 6rem; height: 6rem; background: oklch(var(--chart-1) / 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: oklch(var(--chart-1));">
+                <svg style="width: 2.5rem; height: 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Inclusão para Todos</h3>
+            <p style="color: oklch(var(--muted-foreground)); line-height: 1.6;">
+              Acreditamos que toda pessoa merece acesso igual à informação e às oportunidades digitais, 
+              independentemente de suas habilidades.
+            </p>
+          </div>
+
+          <!-- Value 2 -->
+          <div class="card text-center">
+            <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+              <div class="illustration-float" style="animation-delay: 2s; width: 6rem; height: 6rem; background: oklch(var(--chart-2) / 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: oklch(var(--chart-2));">
+                <svg style="width: 2.5rem; height: 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Aprendizado Compartilhado</h3>
+            <p style="color: oklch(var(--muted-foreground)); line-height: 1.6;">
+              Crescemos juntos compartilhando conhecimento, experiências e descobertas. 
+              Cada pessoa ensina e aprende ao mesmo tempo.
+            </p>
+          </div>
+
+          <!-- Value 3 -->
+          <div class="card text-center">
+            <div style="display: flex; justify-content: center; margin-bottom: 1.5rem;">
+              <div class="illustration-float" style="animation-delay: 4s; width: 6rem; height: 6rem; background: oklch(var(--chart-3) / 0.1); border-radius: 1rem; display: flex; align-items: center; justify-content: center; color: oklch(var(--chart-3));">
+                <svg style="width: 2.5rem; height: 2.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+                </svg>
+              </div>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">Colaboração Aberta</h3>
+            <p style="color: oklch(var(--muted-foreground)); line-height: 1.6;">
+              Trabalhamos juntos, dividimos recursos e apoiamos uns aos outros para 
+              criar soluções que beneficiem toda a comunidade.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Access Section -->
+    <section class="py-20">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 style="font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: bold; margin-bottom: 1.5rem;">
+            Por onde você quer começar?
+          </h2>
+          <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); max-width: 48rem; margin: 0 auto;">
+            Escolha o caminho que mais faz sentido para você neste momento. Todos levam ao mesmo lugar: 
+            uma web mais acessível para todos.
+          </p>
+        </div>
+        
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <!-- Articles -->
+          <a href="/articles.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <div style="width: 3rem; height: 3rem; background-color: oklch(var(--chart-1) / 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-center; margin-bottom: 1.5rem;">
+              <svg style="width: 1.5rem; height: 1.5rem; color: oklch(var(--chart-1));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.246 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">
+              Aprender & Descobrir
+            </h3>
+            <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+              Explore artigos práticos, tutoriais e guias escritos por nossa comunidade 
+              para todos os níveis de conhecimento.
+            </p>
+            <div style="display: flex; align-items: center; color: oklch(var(--primary));">
+              <span style="font-size: 0.875rem; font-weight: 500;">Começar a ler</span>
+              <svg style="width: 1rem; height: 1rem; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+
+          <!-- People -->
+          <a href="/people.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <div style="width: 3rem; height: 3rem; background-color: oklch(var(--chart-2) / 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-center; margin-bottom: 1.5rem;">
+              <svg style="width: 1.5rem; height: 1.5rem; color: oklch(var(--chart-2));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">
+              Conectar & Compartilhar
+            </h3>
+            <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+              Conheça pessoas incríveis que estão fazendo a diferença na acessibilidade 
+              e faça parte desta rede de apoio.
+            </p>
+            <div style="display: flex; align-items: center; color: oklch(var(--primary));">
+              <span style="font-size: 0.875rem; font-weight: 500;">Conhecer pessoas</span>
+              <svg style="width: 1rem; height: 1rem; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+
+          <!-- Projects -->
+          <a href="/projects.html" class="card" style="text-decoration: none; color: inherit; cursor: pointer;">
+            <div style="width: 3rem; height: 3rem; background-color: oklch(var(--chart-3) / 0.2); border-radius: 0.5rem; display: flex; align-items: center; justify-center; margin-bottom: 1.5rem;">
+              <svg style="width: 1.5rem; height: 1.5rem; color: oklch(var(--chart-3));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"></path>
+              </svg>
+            </div>
+            <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem;">
+              Construir & Contribuir
+            </h3>
+            <p style="color: oklch(var(--muted-foreground)); margin-bottom: 1.5rem; line-height: 1.6;">
+              Veja projetos inspiradores criados pela comunidade e descubra como 
+              contribuir ou compartilhar suas próprias ideias.
+            </p>
+            <div style="display: flex; align-items: center; color: oklch(var(--primary));">
+              <span style="font-size: 0.875rem; font-weight: 500;">Ver projetos</span>
+              <svg style="width: 1rem; height: 1rem; margin-left: 0.5rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
+              </svg>
+            </div>
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Newsletter Signup -->
+    <section id="newsletter" class="py-20" style="background: linear-gradient(to right, oklch(var(--primary) / 0.05), oklch(var(--background)), oklch(var(--chart-2) / 0.05));">
+      <div class="container">
+        <div class="text-center mb-16">
+          <h2 style="font-size: clamp(1.875rem, 4vw, 2.25rem); font-weight: bold; margin-bottom: 1.5rem;">
+            Faça parte desta jornada
+          </h2>
+          <p style="font-size: 1.25rem; color: oklch(var(--muted-foreground)); max-width: 48rem; margin: 0 auto 2rem;">
+            Nossa comunidade cresce a cada dia com pessoas que acreditam que juntos podemos 
+            criar uma web mais inclusiva e acessível. Qual será sua contribuição?
+          </p>
+          
+          <form class="flex flex-col sm:flex-row gap-4 max-w-md mx-auto mb-8">
+            <input type="email" 
+                   placeholder="Seu melhor email" 
+                   style="flex: 1; padding: 0.75rem 1rem; border-radius: calc(var(--radius)); border: 1px solid oklch(var(--border)); background-color: oklch(var(--background)); color: oklch(var(--foreground));"
+                   required
+                   aria-label="Endereço de email">
+            <button type="submit" class="btn-primary">
+              <svg style="width: 1rem; height: 1rem;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"></path>
+              </svg>
+              Inscrever-se
+            </button>
+          </form>
+          <p style="font-size: 0.75rem; color: oklch(var(--muted-foreground));">
+            Sem spam. Cancele quando quiser. ❤️
+          </p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t" style="background-color: oklch(var(--card));">
+    <div class="container py-12">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <div class="flex items-center space-x-2 mb-4">
+            <div style="width: 2rem; height: 2rem; background-color: oklch(var(--primary)); border-radius: 0.5rem; display: flex; align-items: center; justify-content: center;">
+              <svg style="width: 1.25rem; height: 1.25rem; color: oklch(var(--primary-foreground));" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+              </svg>
+            </div>
+            <h3 style="font-weight: bold; font-size: 1.125rem;">AccessibilityHub</h3>
+          </div>
+          <p style="color: oklch(var(--muted-foreground)); font-size: 0.875rem; margin-bottom: 1rem; line-height: 1.6;">
+            Criando um mundo digital mais inclusivo através de educação, ferramentas e comunidade.
+          </p>
+          <div class="flex space-x-4">
+            <a href="#" style="color: oklch(var(--muted-foreground)); transition: color 0.2s ease;" aria-label="Twitter">
+              <svg style="height: 1.25rem; width: 1.25rem;" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"/>
+              </svg>
+            </a>
+            <a href="#" style="color: oklch(var(--muted-foreground)); transition: color 0.2s ease;" aria-label="GitHub">
+              <svg style="height: 1.25rem; width: 1.25rem;" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Conteúdo</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/articles.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;">Artigos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/resources.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;">Recursos</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/projects.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;">Projetos</a>
+            </li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 style="font-weight: 600; margin-bottom: 1rem;">Comunidade</h4>
+          <ul style="list-style: none; padding: 0; margin: 0;">
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/people.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;">Pessoas</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="/contact.html" style="color: oklch(var(--muted-foreground)); text-decoration: none; font-size: 0.875rem; transition: color 0.2s ease;">Contato</a>
+            </li>
+            <li style="margin-bottom: 0.75rem;">
+              <a href="#newsletter" style="color: oklch(var(--muted

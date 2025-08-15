@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Complete Guide to ARIA Labels and Descriptions - Learn how to implement ARIA attributes effectively for better accessibility">
+  <meta name="keywords" content="ARIA labels, accessibility, screen readers, web accessibility, WCAG">
+  <title>Complete Guide to ARIA Labels and Descriptions - AccessibilityHub</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: 'oklch(0.296 0.086 180.0)',
+            'primary-foreground': 'oklch(0.985 0 0)',
+          }
+        }
+      }
+    }
+  </script>
+  
+  <style>
+    :root {
+      --primary: oklch(0.296 0.086 180.0);
+      --primary-foreground: oklch(0.985 0 0);
+    }
+    .btn-primary {
+      background-color: var(--primary);
+      color: var(--primary-foreground);
+    }
+    .prose h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .prose h3 {
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-top: 1.5rem;
+      margin-bottom: 0.75rem;
+    }
+    .prose p {
+      margin-bottom: 1rem;
+      line-height: 1.7;
+    }
+    .prose ul {
+      margin: 1rem 0;
+      padding-left: 1.5rem;
+    }
+    .prose li {
+      margin-bottom: 0.5rem;
+    }
+    .prose code {
+      background-color: #f3f4f6;
+      padding: 0.125rem 0.25rem;
+      border-radius: 0.25rem;
+      font-size: 0.875rem;
+    }
+    .prose pre {
+      background-color: #1f2937;
+      color: #f9fafb;
+      padding: 1rem;
+      border-radius: 0.5rem;
+      overflow-x: auto;
+      margin: 1rem 0;
+    }
+  </style>
+</head>
+<body class="min-h-screen bg-white text-gray-900">
+
+  <!-- Header -->
+  <header class="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur">
+    <div class="container mx-auto flex h-16 max-w-screen-2xl items-center px-4">
+      <nav class="flex items-center space-x-4 lg:space-x-6" role="navigation" aria-label="Main navigation">
+        <a href="/index.html" class="mr-6 flex items-center space-x-2" aria-label="AccessibilityHub homepage">
+          <span class="text-xl font-bold text-primary">AccessibilityHub</span>
+        </a>
+        <a href="/podcast.html" class="transition-colors hover:text-primary text-sm font-medium">Podcast</a>
+        <a href="/articles.html" class="transition-colors text-primary text-sm font-medium">Articles</a>
+        <a href="/resources.html" class="transition-colors hover:text-primary text-sm font-medium">Resources</a>
+        <a href="/people.html" class="transition-colors hover:text-primary text-sm font-medium">People</a>
+        <a href="/projects.html" class="transition-colors hover:text-primary text-sm font-medium">Projects</a>
+        <a href="/contact.html" class="transition-colors hover:text-primary text-sm font-medium">Contact</a>
+      </nav>
+      <div class="flex flex-1 items-center justify-end space-x-2">
+        <button class="inline-flex items-center justify-center rounded-md p-2 hover:bg-gray-100" 
+                onclick="toggleTheme()" 
+                aria-label="Toggle theme">
+          <svg class="h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"></path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- Article Header -->
+    <article class="max-w-4xl mx-auto px-4 py-8">
+      <!-- Breadcrumb -->
+      <nav aria-label="Breadcrumb" class="mb-8">
+        <ol class="flex items-center space-x-2 text-sm text-gray-500">
+          <li><a href="/index.html" class="hover:text-primary">Home</a></li>
+          <li><span>/</span></li>
+          <li><a href="/articles.html" class="hover:text-primary">Articles</a></li>
+          <li><span>/</span></li>
+          <li class="text-gray-900">Complete Guide to ARIA Labels</li>
+        </ol>
+      </nav>
+
+      <!-- Article Meta -->
+      <div class="mb-8">
+        <div class="flex flex-wrap items-center space-x-2 mb-4">
+          <span class="bg-blue-100 text-blue-800 text-sm px-3 py-1 rounded-full">Tutorial</span>
+          <span class="bg-green-100 text-green-800 text-sm px-3 py-1 rounded-full">Featured</span>
+          <span class="text-gray-500 text-sm">8 min read</span>
+        </div>
+        
+        <h1 class="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+          Complete Guide to ARIA Labels and Descriptions
+        </h1>
+        
+        <div class="flex items-center space-x-4 mb-6">
+          <div class="flex items-center space-x-3">
+            <div class="w-12 h-12 bg-gray-300 rounded-full flex items-center justify-center">
+              <span class="font-medium">SC</span>
+            </div>
+            <div>
+              <div class="font-medium">Sarah Chen</div>
+              <div class="text-sm text-gray-500">Senior UX Designer at Microsoft</div>
+            </div>
+          </div>
+          <div class="text-sm text-gray-500">
+            Published on December 8, 2024
+          </div>
+        </div>
+        
+        <p class="text-xl text-gray-600 leading-relaxed">
+          Master the art of ARIA labels and descriptions to create more accessible web experiences. 
+          This comprehensive guide covers practical examples, common mistakes, and best practices 
+          for implementing ARIA attributes effectively.
+        </p>
+      </div>
+
+      <!-- Share Buttons -->
+      <div class="flex items-center space-x-4 mb-8 pb-8 border-b">
+        <span class="text-sm font-medium text-gray-700">Share:</span>
+        <button class="flex items-center space-x-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M24 4.557c-.883.392-1.832.656-2.828.775 1.017-.609 1.798-1.574 2.165-2.724-.951.564-2.005.974-3.127 1.195-.897-.957-2.178-1.555-3.594-1.555-3.179 0-5.515 2.966-4.797 6.045-4.091-.205-7.719-2.165-10.148-5.144-1.29 2.213-.669 5.108 1.523 6.574-.806-.026-1.566-.247-2.229-.616-.054 2.281 1.581 4.415 3.949 4.89-.693.188-1.452.232-2.224.084.626 1.956 2.444 3.379 4.6 3.419-2.07 1.623-4.678 2.348-7.29 2.04 2.179 1.397 4.768 2.212 7.548 2.212 9.142 0 14.307-7.721 13.995-14.646.962-.695 1.797-1.562 2.457-2.549z"/>
+          </svg>
+          <span>Twitter</span>
+        </button>
+        <button class="flex items-center space-x-2 px-3 py-2 bg-blue-50 text-blue-700 rounded-lg hover:bg-blue-100 transition-colors">
+          <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span>LinkedIn</span>
+        </button>
+        <button class="flex items-center space-x-2 px-3 py-2 bg-gray-50 text-gray-700 rounded-lg hover:bg-gray-100 transition-colors">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path>
+          </svg>
+          <span>Copy Link</span>
+        </button>
+      </div>
+
+      <!-- Article Content -->
+      <div class="prose max-w-none">
+        <h2>Introduction to ARIA Labels</h2>
+        
+        <p>
+          ARIA (Accessible Rich Internet Applications) labels are essential tools for making web content accessible to users who rely on assistive technologies like screen readers. When HTML elements don't provide sufficient semantic information, ARIA labels fill the gap by providing clear, descriptive text that explains the purpose and function of interface elements.
+        </p>
+
+        <p>
+          In this comprehensive guide, we'll explore the different types of ARIA labels, when to use them, and how to implement them correctly to create truly accessible web experiences.
+        </p>
+
+        <h2>Understanding ARIA Labeling Attributes</h2>
+
+        <h3>aria-label</h3>
+        
+        <p>
+          The <code>aria-label</code> attribute provides an accessible name for an element when the visible text isn't sufficient or descriptive enough for screen reader users.
+        </p>
+
+        <pre><code>&lt;button aria-label="Close dialog"&gt;×&lt;/button&gt;
+
+&lt;input type="search" aria-label="Search products" placeholder="Search..."&gt;</code></pre>
+
+        <h3>aria-labelledby</h3>
+        
+        <p>
+          Use <code>aria-labelledby</code> to reference other elements that serve as labels. This creates a programmatic relationship between the element and its label.
+        </p>
+
+        <pre><code>&lt;h2 id="billing"&gt;Billing Address&lt;/h2&gt;
+&lt;fieldset aria-labelledby="billing"&gt;
+  &lt;input type="text" placeholder="Street Address"&gt;
+  &lt;input type="text" placeholder="City"&gt;
+&lt;/fieldset&gt;</code></pre>
+
+        <h3>aria-describedby</h3>
+        
+        <p>
+          The <code>aria-describedby</code> attribute references elements that provide additional description or help text for the current element.
+        </p>
+
+        <pre><code>&lt;input type="password" aria-describedby="pwd-help"&gt;
+&lt;div id="pwd-help"&gt;Password must be at least 8 characters long&lt;/div&gt;</code></pre>
+
+        <h2>Best Practices for ARIA Labels</h2>
+
+        <h3>1. Keep Labels Concise and Descriptive</h3>
+        
+        <p>
+          ARIA labels should be brief but provide enough context for users to understand the element's purpose. Avoid redundant information and focus on the essential function.
+        </p>
+
+        <ul>
+          <li><strong>Good:</strong> <code>aria-label="Search products"</code></li>
+          <li><strong>Poor:</strong> <code>aria-label="Click this button to search for products in our database"</code></li>
+        </ul>
+
+        <h3>2. Use Native HTML Semantics First</h3>
+        
+        <p>
+          Always prefer native HTML elements with built-in semantics over ARIA attributes when possible. ARIA should supplement, not replace, semantic HTML.
+        </p>
+
+        <pre><code>&lt;!-- Preferred --&gt;
+&lt;button&gt;Submit Form&lt;/button&gt;
+
+&lt;!-- Only when necessary --&gt;
+&lt;div role="button" aria-label="Submit Form" tabindex="0"&gt;Submit&lt;/div&gt;</code></pre>
+
+        <h3>3. Don't Override Visible Text Unnecessarily</h3>
+        
+        <p>
+          When an element has clear, descriptive visible text, additional ARIA labels may create confusion. Screen readers will typically announce the ARIA label instead of the visible text.
+        </p>
+
+        <h2>Common Use Cases</h2>
+
+        <h3>Icon Buttons</h3>
+        
+        <p>
+          Buttons with only icons need descriptive labels to be accessible:
+        </p>
+
+        <pre><code>&lt;button aria-label="Edit profile"&gt;
+  &lt;svg&gt;&lt;!-- Edit icon --&gt;&lt;/svg&gt;
+&lt;/button&gt;
+
+&lt;button aria-label="Delete item"&gt;
+  &lt;svg&gt;&lt;!-- Trash icon --&gt;&lt;/svg&gt;
+&lt;/button&gt;</code></pre>
+
+        <h3>Form Fields with Visual Labels</h3>
+        
+        <p>
+          When form fields rely on visual design rather than explicit labels:
+        </p>
+
+        <pre><code>&lt;div class="search-container"&gt;
+  &lt;input type="search" aria-label="Search articles" placeholder="Search..."&gt;
+  &lt;button aria-label="Submit search"&gt;
+    &lt;svg&gt;&lt;!-- Search icon --&gt;&lt;/svg&gt;
+  &lt;/button&gt;
+&lt;/div&gt;</code></pre>
+
+        <h3>Complex Interactive Elements</h3>
+        
+        <p>
+          For custom components like sliders, carousels, or data visualizations:
+        </p>
+
+        <pre><code>&lt;div role="slider" 
+     aria-label="Volume control" 
+     aria-valuemin="0" 
+     aria-valuemax="100" 
+     aria-valuenow="50"
+     tabindex="0"&gt;
+  &lt;!-- Slider implementation --&gt;
+&lt;/div&gt;</code></pre>
+
+        <h2>Testing Your ARIA Labels</h2>
+
+        <p>
+          Always test your ARIA implementation with actual screen readers and other assistive technologies:
+        </p>
+
+        <ul>
+          <li><strong>NVDA</strong> (Windows) - Free screen reader</li>
+          <li><strong>JAWS</strong> (Windows) - Popular commercial screen reader</li>
+          <li><strong>VoiceOver</strong> (macOS/iOS) - Built-in screen reader</li>
+          <li><strong>TalkBack</strong> (Android) - Built-in screen reader</li>
+        </ul>
+
+        <p>
+          You can also use browser developer tools and accessibility testing tools like axe-core to validate your implementation.
+        </p>
+
+        <h2>Conclusion</h2>
+
+        <p>
+          ARIA labels are powerful tools for creating accessible web experiences, but they should be used thoughtfully and tested thoroughly. Remember that the best accessibility comes from semantic HTML combined with well-implemented ARIA attributes where needed.
+        </p>
+
+        <p>
+          By following the practices outlined in this guide, you'll be well on your way to creating web interfaces that work for everyone, regardless of the assistive technologies they use.
+        </p>
+      </div>
+
+      <!-- Article Footer -->
+      <div class="mt-12 pt-8 border-t">
+        <div class="flex items-center justify-between">
+          <div class="flex items-center space-x-4">
+            <span class="text-sm text-gray-500">Was this article helpful?</span>
+            <button class="flex items-center space-x-2 px-3 py-2 bg-green-50 text-green-700 rounded-lg hover:bg-green-100 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+              </svg>
+              <span>Yes</span>
+            </button>
+            <button class="flex items-center space-x-2 px-3 py-2 bg-red-50 text-red-700 rounded-lg hover:bg-red-100 transition-colors">
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" transform="rotate(180)">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.163 0-.326-.02-.485-.06L7 20m7-10V5a2 2 0 00-2-2h-.095c-.5 0-.905.405-.905.905 0 .714-.211 1.412-.608 2.006L7 11v9m7-10h-2M7 20H5a2 2 0 01-2-2v-6a2 2 0 012-2h2.5"></path>
+              </svg>
+              <span>No</span>
+            </button>
+          </div>
+          <a href="/articles.html" class="text-primary hover:underline font-medium">
+            ← Back to Articles
+          </a>
+        </div>
+      </div>
+    </article>
+
+    <!-- Related Articles -->
+    <section class="bg-gray-50 py-16">
+      <div class="container mx-auto px-4">
+        <div class="max-w-6xl mx-auto">
+          <h2 class="text-3xl font-bold mb-8 text-center">Related Articles</h2>
+          
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="bg-blue-100 text-blue-800 text-xs px-2 py-1 rounded-full">Tutorial</span>
+                <span class="text-sm text-gray-500">6 min read</span>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors">
+                <a href="#">Keyboard Navigation Best Practices</a>
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Learn essential keyboard navigation patterns for accessible web interfaces.
+              </p>
+            </article>
+
+            <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="bg-purple-100 text-purple-800 text-xs px-2 py-1 rounded-full">Best Practices</span>
+                <span class="text-sm text-gray-500">8 min read</span>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors">
+                <a href="#">Screen Reader Testing Guide</a>
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Comprehensive guide to testing your website with popular screen readers.
+              </p>
+            </article>
+
+            <article class="bg-white rounded-xl border border-gray-200 p-6 hover:shadow-lg transition-shadow">
+              <div class="flex items-center space-x-2 mb-3">
+                <span class="bg-green-100 text-green-800 text-xs px-2 py-1 rounded-full">Case Study</span>
+                <span class="text-sm text-gray-500">10 min read</span>
+              </div>
+              <h3 class="text-lg font-semibold mb-2 hover:text-primary transition-colors">
+                <a href="#">Building Accessible Forms</a>
+              </h3>
+              <p class="text-gray-600 text-sm leading-relaxed">
+                Real-world case study of implementing accessible form patterns.
+              </p>
+            </article>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="border-t bg-gray-50">
+    <div class="container mx-auto py-12 px-4">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+        <div>
+          <h3 class="font-bold text-lg mb-4">AccessibilityHub</h3>
+          <p class="text-gray-600 text-sm mb-4">
+            Making the web accessible for everyone through education, resources, and community.
+          </p>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Content</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/articles.html" class="text-gray-600 hover:text-primary">Articles</a></li>
+            <li><a href="/podcast.html" class="text-gray-600 hover:text-primary">Podcast</a></li>
+            <li><a href="/resources.html" class="text-gray-600 hover:text-primary">Resources</a></li>
+            <li><a href="/projects.html" class="text-gray-600 hover:text-primary">Projects</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Community</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/people.html" class="text-gray-600 hover:text-primary">People</a></li>
+            <li><a href="/contact.html" class="text-gray-600 hover:text-primary">Contact</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-primary">Newsletter</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-primary">Events</a></li>
+          </ul>
+        </div>
+        
+        <div>
+          <h4 class="font-semibold mb-4">Resources</h4>
+          <ul class="space-y-2 text-sm">
+            <li><a href="/design-system.html" class="text-gray-600 hover:text-primary">Design System</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-primary">Guidelines</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-primary">Tools</a></li>
+            <li><a href="#" class="text-gray-600 hover:text-primary">Legal</a></li>
+          </ul>
+        </div>
+      </div>
+      
+      <div class="border-t mt-8 pt-8 text-center text-sm text-gray-600">
+        <p>&copy; 2024 AccessibilityHub. All rights reserved. Making the web accessible for everyone.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const isDark = html.classList.contains('dark');
+      
+      if (isDark) {
+        html.classList.remove('dark');
+        html.classList.add('light');
+        localStorage.setItem('theme', 'light');
+      } else {
+        html.classList.remove('light');
+        html.classList.add('dark');
+        localStorage.setItem('theme', 'dark');
+      }
+    }
+    
+    // Load saved theme
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.classList.add(savedTheme);
+  </script>
+</body>
+</html>
